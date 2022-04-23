@@ -1,11 +1,11 @@
-import {SET_LOADING,CLEAR_LOADING} from "..types/appTypes";
+import {SET_LOADING,CLEAR_LOADING} from "../types/appTypes";
 
 
 const initialState = {
     loading:false,
 }
 
-const appReducer (state = initialState, { type, payload }) => {
+const appReducer=(state = initialState, { type, payload }) => {
   switch (type) {
 
   case SET_LOADING:

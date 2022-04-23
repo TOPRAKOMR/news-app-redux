@@ -5,7 +5,7 @@ const initialState = {
 
 }
 
-const newsReducer (state = initialState, { type, payload }) => {
+const newsReducer=(state = initialState, { type, payload }) => {
   switch (type) {
 
   case SET_NEWS_LIST:

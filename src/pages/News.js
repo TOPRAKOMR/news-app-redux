@@ -5,8 +5,43 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { CardMedia } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios"
+import { setLoading,clearLoading } from "../redux/actions/appActions";
+import { setNewsList } from "../redux/actions/newsActions";
+import { useEffect } from "react";
 
 const News = () => {
+
+  const dispatch =useDispatch();
+  // const {loading}=useSelector((state)=>state.app);
+  const {newsList}=useSelector((state)=>state.news);
+
+  const url =
+    "https://newsapi.org/v2/everything?" +
+    "q=Apple&" +
+    "from=2022-04-18&" +
+    "sortBy=popularity&" +
+    "apiKey=02d142c50d8b4247b974b25323435174";
+
+  const getNews = async () => {
+    try {
+      dispatch(setLoading());
+      const { data } = await axios.get(url);
+      dispatch(setNewsList(data.articles));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      dispatch(clearLoading());
+    }
+  };
+
+  useEffect(()=>{
+    dispatch(getNews());
+  },[]);
+  
+
+
   return (
     <Box
       display="flex"
@@ -14,7 +49,7 @@ const News = () => {
       justifyContent="space-evenly"
       flexWrap="wrap"
     >
-      {[1, 2, 3, 4].map((item, index) => (
+      {newsList.map((item, index) => (
         <Card sx={{ maxWidth: 345, m: 5, maxHeight: 600 }} key={index}>
           <CardMedia
             component="img"

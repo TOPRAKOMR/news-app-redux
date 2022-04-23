@@ -1,4 +1,4 @@
-import {SET_LOADING,CLEAR_LOADING} from "..types/appTypes";
+import {SET_LOADING,CLEAR_LOADING} from "../types/appTypes";
 
 export const setLoading = () => ({
   type: SET_LOADING,
