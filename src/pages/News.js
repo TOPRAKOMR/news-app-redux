@@ -6,9 +6,9 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { CardMedia } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios"
-import { setLoading,clearLoading } from "../redux/actions/appActions";
-import { setNewsList } from "../redux/actions/newsActions";
+// import axios from "axios"
+// import { setLoading,clearLoading } from "../redux/actions/appActions";
+// import { setNewsList } from "../redux/actions/newsActions";
 import { useEffect } from "react";
 import loadingGif from "../assets/loading.gif"
 import { getNews } from "../redux/thunk/newsThunk";
@@ -40,7 +40,7 @@ const News = () => {
 
   useEffect(()=>{
     dispatch(getNews());
-  },[]);
+  },[dispatch]);
   
 
 
