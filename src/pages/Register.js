@@ -8,15 +8,22 @@ import {
   TextField,
   Button,
 } from "@mui/material";
-
+import { useSelector } from "react-redux";
 import { signup } from "../utils/firebaseUtil";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const navigate = useNavigate();
-  const currentUser = true;
+  const {currentUser} = useSelector((state=>state.auth));
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/");
+    }
+  }, [currentUser, navigate]);
+  
 
 
   const handleSingUp = () => {

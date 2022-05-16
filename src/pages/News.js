@@ -10,31 +10,33 @@ import axios from "axios"
 import { setLoading,clearLoading } from "../redux/actions/appActions";
 import { setNewsList } from "../redux/actions/newsActions";
 import { useEffect } from "react";
+import loadingGif from "../assets/loading.gif"
+import { getNews } from "../redux/thunk/newsThunk";
 
 const News = () => {
 
   const dispatch =useDispatch();
-  // const {loading}=useSelector((state)=>state.app);
+  const {loading}=useSelector((state)=>state.app);
   const {newsList}=useSelector((state)=>state.news);
 
-  const url =
-    "https://newsapi.org/v2/everything?" +
-    "q=Apple&" +
-    "from=2022-04-18&" +
-    "sortBy=popularity&" +
-    "apiKey=02d142c50d8b4247b974b25323435174";
+  // const url =
+  //   "https://newsapi.org/v2/everything?" +
+  //   "q=Apple&" +
+  //   "from=2022-04-18&" +
+  //   "sortBy=popularity&" +
+  //   "apiKey=c559cdbabb66421db78dd5e6ff037ff5";
 
-  const getNews = async () => {
-    try {
-      dispatch(setLoading());
-      const { data } = await axios.get(url);
-      dispatch(setNewsList(data.articles));
-    } catch (error) {
-      console.log(error);
-    } finally {
-      dispatch(clearLoading());
-    }
-  };
+  // const getNews = async () => {
+  //   try {
+  //     dispatch(setLoading());
+  //     const { data } = await axios.get(url);
+  //     dispatch(setNewsList(data.articles));
+  //   } catch (error) {
+  //     console.log(error);
+  //   } finally {
+  //     dispatch(clearLoading());
+  //   }
+  // };
 
   useEffect(()=>{
     dispatch(getNews());
@@ -43,7 +45,10 @@ const News = () => {
 
 
   return (
-    <Box
+    <>
+    {loading &&  < img src= {loadingGif} alt="loading_gif" width="81%"/>}
+    {!loading &&(
+      <Box
       display="flex"
       alignItems="center"
       justifyContent="space-evenly"
@@ -78,6 +83,15 @@ const News = () => {
         </Card>
       ))}
     </Box>
+
+
+
+    )}
+    
+    
+    </>
+
+    
   );
 };
 
